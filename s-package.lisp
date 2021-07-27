@@ -178,11 +178,14 @@
    #:catenate #:split #:split-if #:producing #:chunk
 
    ;;(5) variables
-    #:*series-expression-cache*
-    #:*last-series-loop*
-    #:*last-series-error*
-    #:*suppress-series-warnings*
-    )
+   #:*series-expression-cache*
+   #:*last-series-loop*
+   #:*last-series-error*
+   #:*suppress-series-warnings*
+
+   ;;(1) install wrapper
+   #:install-series
+   )
   (:shadow
    #:let #:let* #:multiple-value-bind #:funcall #:defun
    #+(or cmu scl) #:collect #+(or cmu scl) #:iterate)
@@ -236,7 +239,10 @@
     *series-expression-cache*
     *last-series-loop*
     *last-series-error*
-    *suppress-series-warnings*))
+    *suppress-series-warnings*
+
+    ;(1) install wrapper
+    install-series))
 
 #-(or series-ansi)
 (eval-when (compile load eval)

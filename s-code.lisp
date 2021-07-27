@@ -1977,6 +1977,16 @@ value, the old value is not clobbered."
 	(unintern sym pkg))))
   t)
 
+(cl:defun install-series (&rest args &key pkg macro shadow implicit-map
+                                remove shadow-extensions)
+  ;; An exported wrapper because INSTALL is too general but let's not
+  ;; have all this SERIES::INSTALL nonsense.  Must be a wrapper
+  ;; because INSTALL needs to continue to exist as someone will be
+  ;; using it.
+  (declare (ignore pkg macro shadow implicit-map
+                   remove shadow-extensions))
+  (apply #'install args))
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
 ;;Internally used special variables.  Every one is collected here except some
 ;;scan templates used in macro expansion.

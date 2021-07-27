@@ -252,7 +252,7 @@
 	  ((eql (car excl:arglist) 'simple-base-string)
 	   (setf (car excl:arglist) '(simple-array base-char (*))))))
 
-  (series::install)
+  (series:install-series)
 ) ; end of eval-when
 
 (defvar *test* nil "Current test name")
@@ -445,7 +445,7 @@
     (format t "~%Type a string representing a pathname of a scratch disk file: ")
     (setq test-file (with-standard-io-syntax
                       (let ((*read-eval* nil))
-                        (read)))
+                        (read))))
     (if (not (stringp test-file)) (setq test-file nil)))
   (let* ((non-opt (test-non-opt form))
 	 (opt (test-opt form)))
