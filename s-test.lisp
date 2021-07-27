@@ -233,8 +233,17 @@
 ;;;;
 ;;;;
 
-(series::eval-when (:compile-toplevel :load-toplevel :execute)
-  (in-package :common-lisp-user)
+(defpackage #:series/tests
+  (:use
+   #:cl
+   ;; for *BREAK-ON-WARNINGS*
+   #+lispworks #:lispworks
+   #+ccl #:ccl)
+  (:export #:do-tests))
+
+(in-package :series/tests)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
 
   #+(and :allegro-version>= (version>= 5 0) (not (version>= 5 1)))
   (defadvice make-sequence :before
@@ -345,7 +354,7 @@
 	   ;; Harlequin, but for CMUCL, it causes some tests to fail
 	   ;; that otherwise would pass because the compiler generates
 	   ;; a warning.
-	   #-(or cmu scl allegro)
+	   #+(or lispworks ccl)
 	   (*break-on-warnings* t)
 	   #+(or cmu scl allegro harlequin)
 	   (*break-on-signals* #+(or cmu scl allegro) nil

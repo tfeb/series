@@ -18,7 +18,7 @@
   :version "2.2.11"            ; Same as series
   :in-order-to ((test-op (load-op "series")))
   :perform (test-op (o s)
-             (or (funcall (intern "DO-TESTS" (find-package "RT")))
+             (or (funcall (intern "DO-TESTS" (find-package "SERIES/TESTS")))
                  (error "TEST-OP failed for series/tests")))
   :components
   ((:file "s-test")))
