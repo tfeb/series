@@ -443,7 +443,9 @@
 (defun test-opt-&-non-opt (form)
   (loop (if test-file (return nil))
     (format t "~%Type a string representing a pathname of a scratch disk file: ")
-    (setq test-file (read))
+    (setq test-file (with-standard-io-syntax
+                      (let ((*read-eval* nil))
+                        (read)))
     (if (not (stringp test-file)) (setq test-file nil)))
   (let* ((non-opt (test-non-opt form))
 	 (opt (test-opt form)))
