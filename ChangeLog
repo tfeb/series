@@ -1,0 +1,27 @@
+2021-07-27  Tim Bradshaw  <tfb@kingston>
+
+	* LICENSE: license copied from s-code.lisp.
+
+	* Makefile: a maintenance makefile.  This is enough to put series
+	in Qicklisp's local-projects.  It's *not* intended to build it.
+
+	* old/: move old ChangLog, MK defsystem, RELEASE-NOTES to old, as
+	they're hopelessly out of date.
+
+	* s-code.lisp (install-series): add and use install-series.  This
+	is a trivial wrapper for install, but it's exported from the
+	SERIES package.  install still exists because people will use it,
+	and it's still not exported because (I assume) it's too general a
+	name.  But at least now it's possible to set series up without
+	relying on internal symbols.
+
+	* s-test.lisp (test-opt-&-non-opt): read more safely.
+
+	* s-test.lisp (#:series/tests): tests are now in their own package
+	rather than crapping all over CL-USER.  Changes to ASDF definition
+	for this.
+
+	* series.asd ("series", "series/tests"): an initial attempt to
+	update things for recent ASDF.  The description &c are now
+	probably fairly wrong.  sysdcl.lisp is a symlink to series.asd
+	which I use for my :sysdcl command.
