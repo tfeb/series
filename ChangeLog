@@ -1,3 +1,7 @@
+2021-07-28  Tim Bradshaw  <tfb@kingston>
+
+	* s-test.lisp (492): don't declare *print-length* special (SBCL
+	hates it, and it can't be needed)
 2021-07-27  Tim Bradshaw  <tfb@kingston>
 
 	* LICENSE: license copied from s-code.lisp.

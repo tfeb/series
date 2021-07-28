@@ -2205,7 +2205,6 @@
 ;These test restriction violation checks
 
 (defok 492 (tr (let ((*print-length* 2) (x #Z(1 2 3 4 5)))
-		   (declare (special *print-length*))
 		   (collect x)))
   (1 2 3 4 5) 1)
 (defok 493 (tr (let ((*print-length* 2) (x #Z(1 2 3 4 5)))
