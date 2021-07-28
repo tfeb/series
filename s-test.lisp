@@ -239,7 +239,7 @@
    ;; for *BREAK-ON-WARNINGS*
    #+lispworks #:lispworks
    #+ccl #:ccl)
-  (:export #:do-tests))
+  (:export #:do-tests #:*try-to-break-on-warnings*))
 
 (in-package :series/tests)
 
@@ -254,6 +254,9 @@
 
   (series:install-series)
 ) ; end of eval-when
+
+(defvar *try-to-break-on-warnings* t
+  "Try to break on warnings")
 
 (defvar *test* nil "Current test name")
 (defvar *do-tests-when-defined* nil)
@@ -355,12 +358,15 @@
 	   ;; that otherwise would pass because the compiler generates
 	   ;; a warning.
 	   #+(or lispworks ccl)
-	   (*break-on-warnings* t)
-	   #+(or cmu scl allegro harlequin)
-	   (*break-on-signals* #+(or cmu scl allegro) nil
-			       #-(or cmu scl allegro) 'warning)
+	   (*break-on-warnings* *try-to-break-on-warnings*)
+	   #+(or cmu sbcl scl allegro harlequin)
+	   (*break-on-signals*
+            (if *try-to-break-on-warnings*
+                #+(or cmu sbcl scl allegro) nil
+                #-(or cmu sbcl scl allegro) 'warning
+                nil))
 	   ;; Don't print out "Compiling..." messages
-	   #+(or cmu scl)
+	   #+(or cmu sbcl scl)
 	   (*compile-print* nil)
 	   (r (multiple-value-list
 		(eval (form entry)))))

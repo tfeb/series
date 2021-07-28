@@ -2,6 +2,11 @@
 
 	* s-test.lisp (492): don't declare *print-length* special (SBCL
 	hates it, and it can't be needed)
+	(*try-to-break-on-warnings*): try to allow control over whether
+	warnings should cause breaks.  Also add SBCL as equivalent to
+	CMUCL in some conditionalisations: it's probably not, but it may
+	be close enough.
+
 2021-07-27  Tim Bradshaw  <tfb@kingston>
 
 	* LICENSE: license copied from s-code.lisp.
