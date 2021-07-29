@@ -3,9 +3,9 @@
 (in-package :asdf-user)
 
 (defsystem "series"
-    :description "See <http://series.sourceforge.net/>."
+    :description "See <https://github.com/tfeb/series/> for pointers."
     :author "Richard C. Waters"
-    :maintainer "See <http://series.sourceforge.net/>."
+    :maintainer "See <https://github.com/tfeb/series> for pointers."
     :licence "MIT"
     :version "2.2.11"
     :in-order-to ((test-op (test-op "series/tests")))
